@@ -1,0 +1,114 @@
+version: '3'
+
+silent: true
+
+dotenv: ['.env']
+
+tasks:
+  init:
+    desc: Инициализация приложения
+    cmds:
+      - task: copy-root-env-file
+      - task: copy-src-env-file
+      - task: build
+      - task: up
+      - task: create-db
+      - task: composer:install
+      - task: key:generate
+      - task: migrate
+
+  build:
+    desc: Сборка приложения
+    cmd: docker compose -f compose.dev.yaml build --build-arg UID=${BUILD_ARG_UID:-$(id -u)} --build-arg GID=${BUILD_ARG_GID:-$(id -g)}
+
+  shell:
+    desc: Запуск терминала
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php sh
+
+  up:
+    desc: Запуск приложения
+    cmd: docker compose -f compose.dev.yaml up -d
+    status:
+      - docker compose -f compose.dev.yaml exec php echo "test"
+
+  down:
+    desc: Остановка приложения
+    cmd: docker compose -f compose.dev.yaml down --remove-orphans
+
+  composer:install:
+    desc: Запуск composer install
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php composer install
+
+  composer:update:
+    desc: Запуск composer update
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php composer update
+
+  copy-root-env-file:
+    internal: true
+    cmd: cp ./.env.example ./.env
+    status:
+      - test -f ./.env
+
+  copy-src-env-file:
+    internal: true
+    cmd: cp ./src/.env.example ./src/.env
+    status:
+      - test -f ./src/.env
+
+  migrate:
+    desc: Запуск миграций
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php php artisan migrate
+
+  test:
+    desc: Запуск тестов
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php php artisan test {{.CLI_ARGS}}
+
+  stan:
+    desc: Запуск phpstan
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php php -d memory_limit=1G ./vendor/bin/phpstan analyse app/
+
+  rector:
+    desc: Запуск rector
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php ./vendor/bin/rector
+
+  pint:
+    desc: Запуск laravel pint
+    cmds:
+      - task: up
+      - docker compose -f compose.dev.yaml exec php ./vendor/bin/pint
+
+  semgrep:
+    desc: Запуск semgrep
+    cmd: docker run --rm -v "${PWD}:/src" semgrep/semgrep semgrep scan --error
+
+  key:generate:
+    desc: Generate Laravel Key
+    cmd: docker compose -f compose.dev.yaml exec php php artisan key:generate
+
+  create-db:
+    desc: Создание БД
+    cmd: docker exec -i travaler-app-postgres-1 psql -U app < createdb.sql
+
+  prep:
+    desc: Подготовка перед коммитом
+    cmds:
+      - task: up
+      - task: pint
+      - task: stan
+      - task: rector
+      - task: semgrep
+      - task: test
