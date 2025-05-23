@@ -14,6 +14,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name - Имя пользователя
  * @property string $email - Email (уникальный)
  * @property string $password - Пароль (хэшированный)
+ *
+ * @method static UserBuilder query()
  */
 class User extends Authenticatable
 {
