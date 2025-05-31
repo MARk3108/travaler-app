@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Route;
 
+use App\DTOs\Route\FavoriteRouteDTO;
 use App\DTOs\Route\RoutesByTypeDTO;
 use App\DTOs\Route\RouteWithPoiDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Routes\RouteResource;
 use App\Http\Resources\Routes\RouteWithPOIsResource;
+use Throwable;
 use App\Services\Routes\RouteService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
@@ -20,11 +23,12 @@ class RouteController extends Controller
 
     public function getRoutesByType(Request $request): AnonymousResourceCollection
     {
+        $user = $request->user();
         $validated = $request->validate([
             'type' => 'required|string',
         ]);
 
-        $result = $this->service->getRoutesByType(RoutesByTypeDTO::fromArray($validated));
+        $result = $this->service->getRoutesByType(RoutesByTypeDTO::fromArray($validated), $user->id);
 
         return RouteResource::collection($result);
     }
@@ -38,5 +42,21 @@ class RouteController extends Controller
         Log::info($result->title);
 
         return new RouteWithPOIsResource($result);
+    }
+
+    public function addToFavorite(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'status' => 'required'
+        ]);
+        try{
+            $user = $request->user();
+            Log::info($user);
+            $this->service->addToFavorite(FavoriteRouteDTO::fromArray($validated, $user->id));
+            return response()->json(200);
+        }catch (Throwable $exception){
+            return response()->json(['message' => $exception->getMessage()], 400);
+        }
     }
 }

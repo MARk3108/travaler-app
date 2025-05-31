@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property User $user - Пользователь
  * @property int $route_id - ID маршрута (внешний ключ)
  * @property Route $route - Маршрут
+ * @property boolean $status
  */
 class Favorite extends Model
 {
@@ -21,6 +22,7 @@ class Favorite extends Model
     protected $fillable = [
         'user_id',
         'route_id',
+        'status',
     ];
 
     // Связи

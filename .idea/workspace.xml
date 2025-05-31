@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="380cb2b4-6b96-4310-a8f9-68e432b91eea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/DTOs/POI/POIsListDTO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/RouteWithPoiDTO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/ShowRouteDTO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/Routes/RouteWithPOIsResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/FavoriteRouteDTO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Route/RouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Route/RouteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/PointOfInterest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/PointOfInterest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Models/Favorite.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Favorite.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Repositories/Routes/RouteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Repositories/Routes/RouteRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Services/Routes/RouteService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Services/Routes/RouteService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
@@ -333,6 +330,7 @@
       <workItem from="1744484140411" duration="4193000" />
       <workItem from="1748093334076" duration="1038000" />
       <workItem from="1748242923039" duration="45000" />
+      <workItem from="1748671084781" duration="3143000" />
     </task>
     <servers />
   </component>

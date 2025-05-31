@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RouteRepository
 {
-    public function getRoutesByType(string $type): Collection
+    public function getRoutesByType(string $type, int $userId): Collection
     {
-        return Route::query()->whereType($type)->get();
+        return Route::query()->whereType($type)
+            ->whereDoesntHave('favorites', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->get();
     }
 
     public function getWithPOIs(string $routeId): Route
