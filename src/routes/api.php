@@ -23,4 +23,5 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/route/pois', [RouteController::class, 'getRouteWithPOI']);
     Route::post('/route/favorite', [RouteController::class, 'addToFavorite']);
     Route::post('/route/add', [RouteController::class, 'createNewRoute']);
+    Route::get('/recomendations', [RouteController::class, 'getRecomendations']);
 });

@@ -8,7 +8,7 @@ class CreateRouteDTO
         public readonly string $type,
         public readonly string $title,
         public readonly string $description,
-        public readonly ?string $url=null,
+        public readonly ?string $url,
         public readonly array $pois,
     ) {}
 

@@ -75,11 +75,36 @@ class RouteController extends Controller
             'url' => 'nullable|string',
             'pois' => 'required|array',
         ]);
-        try{
+        try {
             $this->service->createNewRoute(CreateRouteDTO::fromArray($validated));
+
             return response()->json(200);
-        }catch (Throwable $exception){
+        } catch (Throwable $exception) {
             return response()->json(['message' => $exception->getMessage()], 400);
         }
+    }
+
+    public function getRecomendations(Request $request): AnonymousResourceCollection
+    {
+        try {
+            $user = $request->user();
+            $result = $this->service->getRecommendedRoutes($user->id);
+            if ($result === null || $result->isEmpty()) {
+                return RouteResource::collection(collect([]))
+                    ->additional([
+                        'message' => 'No recommendations found',
+                        'success' => true,
+                    ]);
+            }
+
+            return RouteResource::collection($result);
+        } catch (Throwable $exception) {
+            return RouteResource::collection(collect([]))
+                ->additional([
+                    'message' => 'Error '.$exception->getMessage(),
+                    'success' => false,
+                ]);
+        }
+
     }
 }
