@@ -11,4 +11,9 @@ class RouteRepository
     {
         return Route::query()->whereType($type)->get();
     }
+
+    public function getWithPOIs(string $routeId): Route
+    {
+        return Route::query()->with('pointsOfInterest')->where('id', $routeId)->first();
+    }
 }

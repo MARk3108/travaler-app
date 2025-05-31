@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="380cb2b4-6b96-4310-a8f9-68e432b91eea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/RoutesByTypeDTO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/EloquentBuilders/RouteBuilder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Route/RouteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/Routes/RouteResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Repositories/Routes/RouteRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Services/Routes/RouteService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/DTOs/POI/POIsListDTO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/RouteWithPoiDTO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/DTOs/Route/ShowRouteDTO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/Routes/RouteWithPOIsResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/Route.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Route.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Route/RouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Route/RouteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Models/PointOfInterest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/PointOfInterest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Repositories/Routes/RouteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Repositories/Routes/RouteRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Services/Routes/RouteService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Services/Routes/RouteService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -334,6 +331,8 @@
       <workItem from="1742799037481" duration="27000" />
       <workItem from="1744110849150" duration="12000" />
       <workItem from="1744484140411" duration="4193000" />
+      <workItem from="1748093334076" duration="1038000" />
+      <workItem from="1748242923039" duration="45000" />
     </task>
     <servers />
   </component>

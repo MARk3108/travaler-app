@@ -20,4 +20,5 @@ Route::prefix('auth')->group(function (): void {
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/routes', [RouteController::class, 'getRoutesByType']);
+    Route::get('/route/pois', [RouteController::class, 'getRouteWithPOI']);
 });
