@@ -40,13 +40,13 @@ class RouteService
 
     public function addToFavorite(FavoriteRouteDTO $favoriteRouteDTO): void
     {
-        try{
+        try {
             Favorite::create([
                 'user_id' => $favoriteRouteDTO->userId,
                 'route_id' => $favoriteRouteDTO->id,
                 'status' => $favoriteRouteDTO->status,
             ]);
-        }catch (Throwable $exception){
+        } catch (Throwable $exception) {
             throw new $exception;
         }
     }

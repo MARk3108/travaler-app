@@ -10,7 +10,7 @@ class RouteRepository
     public function getRoutesByType(string $type, int $userId): Collection
     {
         return Route::query()->whereType($type)
-            ->whereDoesntHave('favorites', function ($query) use ($userId) {
+            ->whereDoesntHave('favorites', function ($query) use ($userId): void {
                 $query->where('user_id', $userId);
             })
             ->get();

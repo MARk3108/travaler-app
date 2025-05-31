@@ -8,12 +8,14 @@ use App\DTOs\Route\RouteWithPoiDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Routes\RouteResource;
 use App\Http\Resources\Routes\RouteWithPOIsResource;
-use Throwable;
+use App\Models\Route;
 use App\Services\Routes\RouteService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class RouteController extends Controller
 {
@@ -48,14 +50,17 @@ class RouteController extends Controller
     {
         $validated = $request->validate([
             'id' => 'required',
-            'status' => 'required'
+            'status' => 'required',
         ]);
-        try{
+        try {
             $user = $request->user();
-            Log::info($user);
             $this->service->addToFavorite(FavoriteRouteDTO::fromArray($validated, $user->id));
-            return response()->json(200);
-        }catch (Throwable $exception){
+            $category = Route::query()->findOrFail($validated['id'])->type;
+
+            return response()->json($category);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json(['error' => 'Route not found'], 404);
+        } catch (Throwable $exception) {
             return response()->json(['message' => $exception->getMessage()], 400);
         }
     }
