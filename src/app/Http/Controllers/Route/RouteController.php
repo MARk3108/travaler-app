@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Route;
 
+use App\DTOs\Route\CreateRouteDTO;
 use App\DTOs\Route\FavoriteRouteDTO;
 use App\DTOs\Route\RoutesByTypeDTO;
 use App\DTOs\Route\RouteWithPoiDTO;
@@ -61,6 +62,23 @@ class RouteController extends Controller
         } catch (ModelNotFoundException $exception) {
             return response()->json(['error' => 'Route not found'], 404);
         } catch (Throwable $exception) {
+            return response()->json(['message' => $exception->getMessage()], 400);
+        }
+    }
+
+    public function createNewRoute(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'type' => 'required|string',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'url' => 'nullable|string',
+            'pois' => 'required|array',
+        ]);
+        try{
+            $this->service->createNewRoute(CreateRouteDTO::fromArray($validated));
+            return response()->json(200);
+        }catch (Throwable $exception){
             return response()->json(['message' => $exception->getMessage()], 400);
         }
     }
